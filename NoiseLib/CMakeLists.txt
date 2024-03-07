@@ -1,23 +1,39 @@
+cmake_minimum_required(VERSION 3.18.0)
+
+project(Noise VERSION 0.1.0 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Activate OpenMP
+find_package(OpenMP REQUIRED)
+
+# Add CMake recipes
+list(PREPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
+
+# Set the project as startup project in Visual Studio
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Noise)
+
 add_library(NoiseLib STATIC)
 
 message(STATUS "Creating target 'NoiseLib'")
 
 set(HEADER_FILES
     include/controlfunction.h
-    include/imagecontrolfunction.h
-    include/lichtenbergcontrolfunction.h
+    #include/imagecontrolfunction.h
+    #include/lichtenbergcontrolfunction.h
     include/math2d.h
     include/math3d.h
     include/noise.h
     include/perlin.h
-    include/perlincontrolfunction.h
-    include/planecontrolfunction.h
+    #include/perlincontrolfunction.h
+    #include/planecontrolfunction.h
     include/spline.h
     include/utils.h
 )
 
 set(SRC_FILES
-    source/imagecontrolfunction.cpp
+    #source/imagecontrolfunction.cpp
     source/math2d.cpp
     source/math3d.cpp
     source/perlin.cpp
@@ -38,13 +54,15 @@ target_sources(NoiseLib
 
 target_include_directories(NoiseLib
     PUBLIC
-    ${OpenCV_INCLUDE_DIRS}
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    #${OpenCV_INCLUDE_DIRS}
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../.>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+    PRIVATE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
 
 target_link_libraries(NoiseLib 
     PUBLIC
     OpenMP::OpenMP_CXX
-    ${OpenCV_LIBS}
+    #${OpenCV_LIBS}
 )

@@ -6,13 +6,13 @@
 
 // Chordal Catmull-Rom spline
 // t is an absolute time
-Point2D CatmullRomSpline(const Point2D& p0, const Point2D& p1, const Point2D& p2, const Point2D& p3, double t);
-Point3D CatmullRomSpline(const Point3D& p0, const Point3D& p1, const Point3D& p2, const Point3D& p3, double t);
+Point2D CatmullRomSpline(const Point2D& p0, const Point2D& p1, const Point2D& p2, const Point2D& p3, float t);
+Point3D CatmullRomSpline(const Point3D& p0, const Point3D& p1, const Point3D& p2, const Point3D& p3, float t);
 
 // Subdivide the segment between p1 and p2 using a chordal Catmull-Rom spline
 // x is the proportion of time between t1 and t2
-Point2D SubdivideCatmullRomSpline(const Point2D& p0, const Point2D& p1, const Point2D& p2, const Point2D& p3, double x);
-Point3D SubdivideCatmullRomSpline(const Point3D& p0, const Point3D& p1, const Point3D& p2, const Point3D& p3, double x);
+Point2D SubdivideCatmullRomSpline(const Point2D& p0, const Point2D& p1, const Point2D& p2, const Point2D& p3, float x);
+Point3D SubdivideCatmullRomSpline(const Point3D& p0, const Point3D& p1, const Point3D& p2, const Point3D& p3, float x);
 
 // Subdivide the segment between p1 and p2 using a chordal Catmull-Rom spline in N points
 template <size_t N>
@@ -20,9 +20,9 @@ std::array<Point2D, N> SubdivideCatmullRomSpline(const Point2D& p0, const Point2
 {
 	std::array<Point2D, N> points;
 
-	for (int n = 0; n < points.size(); n++)
+	for (size_t n = 0; n < points.size(); n++)
 	{
-		const double t = double(n + 1) / (N + 1);
+		const float t = float(n + 1) / (N + 1);
 		points[n] = SubdivideCatmullRomSpline(p0, p1, p2, p3, t);
 	}
 
@@ -35,9 +35,9 @@ std::array<Point3D, N> SubdivideCatmullRomSpline(const Point3D& p0, const Point3
 {
 	std::array<Point3D, N> points;
 
-	for (int n = 0; n < points.size(); n++)
+	for (size_t n = 0; n < points.size(); n++)
 	{
-		const double t = double(n + 1) / (N + 1);
+		const float t = float(n + 1) / (N + 1);
 		points[n] = SubdivideCatmullRomSpline(p0, p1, p2, p3, t);
 	}
 
