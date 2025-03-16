@@ -12,12 +12,14 @@ find_package(OpenMP REQUIRED)
 list(PREPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
 
 # Dependencies for application
-include(opencv)
-include(qt6)
+# include(opencv)
+# include(qt6)
 
 add_subdirectory(NoiseLib)
-add_subdirectory(Noise)
-add_subdirectory(InteractiveDesigner)
+# add_subdirectory(Noise)
+# add_subdirectory(InteractiveDesigner)
+
+target_compile_options(NoiseLib PRIVATE -Wno-unused-parameter)
 
 # Set the project as startup project in Visual Studio
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Noise)
